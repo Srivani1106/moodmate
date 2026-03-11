@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <div class="login">
+        <div id="loginform">
+        <h2>Login</h2>
+        <div class="input-group">
+            <input type="email" placeholder="Email">
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="Password">
+        </div>
+        <button id="loginBtn">Login</button>
+        <div class="toggle">
+            Don't have an account? <span onclick="showSignup()">Sign up</span>
+        </div>
+        </div>
+    <div id="signupform" class="hidden">
+        <h2>sign Up</h2>
+        <div class="input-group">
+            <input type="text" placeholder="Name">
+        </div>
+        <div class="input-group">
+            <input type="email" placeholder="Email">
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="Password">
+        </div>
+        <button id="signupBtn">Create Account</button>
+
+        <div class="toggle">
+            Already have an account? <span onclick="showLogin()">Login</span>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script>
+    function showSignup(){
+        document.querySelector('#loginform').classList.add('hidden');
+        document.querySelector('#signupform').classList.remove('hidden');
+    }
+
+    function showLogin(){
+        document.querySelector('#signupform').classList.add('hidden');
+        document.querySelector('#loginform').classList.remove('hidden');
+    }
+
+    // LOGIN
+    document.getElementById("loginBtn").addEventListener("click", () => {
+        localStorage.setItem("loggedIn", "true");
+        window.location.href = "index.html";
+    });
+
+    // SIGNUP
+    document.getElementById("signupBtn").addEventListener("click", () => {
+        localStorage.setItem("loggedIn", "true");
+        window.location.href = "index.html";
+    });
+</script>
+
+
+</body>
+</html>
