@@ -1,70 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Login – mindAIry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-    <div class="container">
-    <div class="login">
-        <div id="loginform">
-        <h2>Login</h2>
-        <div class="input-group">
-            <input type="email" placeholder="Email">
-        </div>
-        <div class="input-group">
-            <input type="password" placeholder="Password">
-        </div>
-        <button id="loginBtn">Login</button>
-        <div class="toggle">
-            Don't have an account? <span onclick="showSignup()">Sign up</span>
-        </div>
-        </div>
-    <div id="signupform" class="hidden">
-        <h2>sign Up</h2>
-        <div class="input-group">
-            <input type="text" placeholder="Name">
-        </div>
-        <div class="input-group">
-            <input type="email" placeholder="Email">
-        </div>
-        <div class="input-group">
-            <input type="password" placeholder="Password">
-        </div>
-        <button id="signupBtn">Create Account</button>
 
-        <div class="toggle">
-            Already have an account? <span onclick="showLogin()">Login</span>
+  <div class="split-layout">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="left-inner">
+        <div class="brand">
+          <img src="journaling logo.png" alt="mindAIry logo" class="brand-logo">
+          <span class="brand-name">MoodMate</span>
         </div>
+        <h1 class="left-headline">Your mind,<br><em>understood.</em></h1>
+        <p class="left-sub">A safe space to write, reflect, and grow — with AI that listens.</p>
+        <div class="feature-list">
+          <div class="feature-item"><span class="fi-icon">📓</span> 4 journal types for every mood</div>
+          <div class="feature-item"><span class="fi-icon">✨</span> AI-powered emotion insights</div>
+          <div class="feature-item"><span class="fi-icon">🌸</span> Maia, your personal AI companion</div>
+          <div class="feature-item"><span class="fi-icon">🔥</span> Streaks to keep you consistent</div>
+        </div>
+      </div>
+      <!-- decorative blobs -->
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
     </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="form-card">
+
+        <!-- TABS -->
+        <div class="tabs">
+          <button class="tab active" id="loginTab">Log In</button>
+          <button class="tab" id="signupTab">Sign Up</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div class="form-section" id="loginForm">
+          <h2 class="form-title">Welcome back 👋</h2>
+          <p class="form-sub">Good to see you again.</p>
+
+          <div class="field">
+            <label>Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter your username" autocomplete="username" />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" />
+              <button class="eye-btn" data-target="loginPassword">👁</button>
+            </div>
+          </div>
+
+          <p class="form-error" id="loginError"></p>
+          <button class="submit-btn" id="loginBtn">Log In →</button>
+
+          <p class="form-switch">Don't have an account? <a href="#" id="goSignup">Sign up free</a></p>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div class="form-section hidden" id="signupForm">
+          <h2 class="form-title">Create account ✨</h2>
+          <p class="form-sub">Start your journaling journey.</p>
+
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" id="signupName" placeholder="What should we call you?" />
+          </div>
+          <div class="field">
+            <label>Username</label>
+            <input type="text" id="signupUsername" placeholder="Choose a username" autocomplete="username" />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="password-wrap">
+              <input type="password" id="signupPassword" placeholder="Create a password" autocomplete="new-password" />
+              <button class="eye-btn" data-target="signupPassword">👁</button>
+            </div>
+            <div class="password-strength" id="strengthBar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <p class="strength-label" id="strengthLabel"></p>
+          </div>
+          <div class="field">
+            <label>Confirm Password</label>
+            <div class="password-wrap">
+              <input type="password" id="signupConfirm" placeholder="Repeat your password" autocomplete="new-password" />
+              <button class="eye-btn" data-target="signupConfirm">👁</button>
+            </div>
+          </div>
+
+          <p class="form-error" id="signupError"></p>
+          <button class="submit-btn" id="signupBtn">Create Account →</button>
+
+          <p class="form-switch">Already have an account? <a href="#" id="goLogin">Log in</a></p>
+        </div>
+
+      </div>
     </div>
-    </div>
-    <script>
-    function showSignup(){
-        document.querySelector('#loginform').classList.add('hidden');
-        document.querySelector('#signupform').classList.remove('hidden');
-    }
 
-    function showLogin(){
-        document.querySelector('#signupform').classList.add('hidden');
-        document.querySelector('#loginform').classList.remove('hidden');
-    }
+  </div>
 
-    // LOGIN
-    document.getElementById("loginBtn").addEventListener("click", () => {
-        localStorage.setItem("loggedIn", "true");
-        window.location.href = "index.html";
-    });
-
-    // SIGNUP
-    document.getElementById("signupBtn").addEventListener("click", () => {
-        localStorage.setItem("loggedIn", "true");
-        window.location.href = "index.html";
-    });
-</script>
-
-
+<script src="login.js"></script>
 </body>
 </html>

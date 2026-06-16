@@ -9,12 +9,12 @@
 <body>
     <nav>
         <ul >
-            <li class="logo"><a href="#"><img src="journaling logo.png" alt="Logo"><span>mindAIry</span></a></li>
+            <li class="logo"><a href="#"><img src="journaling logo.png" alt="Logo"><span>MoodMate</span></a></li>
             <li><a href="index.html">Home</a></li>
             <li><a href="journal.html">Journal</a></li>
-            <li><a href="#">Insights</a></li>
-            <li><a href="#">Chatbot</a></li>
-            <li><a href="login.html" id="auth-btn">Login</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="chatbot.html">Chatbot</a></li>
+            <li id="auth-li"></li>
         </ul>
     </nav>
     <div class="box">
@@ -38,7 +38,6 @@
           <div class="card">
               <span>Multiple Journaling Modes</span>
               <p>Choose from Q&A, Planner, Wreck This, and Notebook journals to express thoughts in a structured or free-form way based on your preference.</p>
-              </ul>
           </div>
           <div class="card">
               <span>Smart Prompts & Summaries</span>
@@ -60,40 +59,29 @@
   <p class="subtitle">
     Different minds need different ways to express. Choose what fits your mood.
   </p>
-
   <div class="journal-grid">
     <div class="journal-card">
         <div class="icon"><img src="bulb.jpg" alt="Logo"></div>
       <h3>Q&A Journal</h3>
-      <p>
-        Guided questions to help you reflect deeply and understand your emotions.
-      </p>
+      <p>Guided questions to help you reflect deeply and understand your emotions.</p>
       <button class="try-btn">Try Now</button>
     </div>
-
     <div class="journal-card">
         <div class="icon"><img src="calendar.jpg" alt="Logo"></div>
       <h3> Planner Journal</h3>
-      <p>
-        Plan your day, track habits, and stay productive while tracking moods.
-      </p>
+      <p>Plan your day, track habits, and stay productive while tracking moods.</p>
       <button class="try-btn">Try Now</button>
     </div>
-
     <div class="journal-card">
         <div class="icon"><img src="pen.jpg" alt="Logo"></div>
       <h3> Wreck This Journal</h3>
-      <p>
-        Creative prompts that let you express freely and release stress.
-      </p>
+      <p>Creative prompts that let you express freely and release stress.</p>
       <button class="try-btn">Try Now</button>
     </div>
     <div class="journal-card">
         <div class="icon"><img src="notesss.jpg" alt="Logo"></div>
       <h3> Notebook Journal</h3>
-      <p>
-        Free-form writing for your thoughts,dreams and daily reflections
-      </p>
+      <p>Free-form writing for your thoughts, dreams and daily reflections</p>
       <button class="try-btn">Try Now</button>
     </div>
   </div>
@@ -103,6 +91,7 @@
     <p>Start writing today and discover patterns in your thoughts and emotions.</p>
     <button class="create">Create Your First Entry</button>
 </section>
+<script src="auth.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

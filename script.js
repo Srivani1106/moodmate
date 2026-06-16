@@ -15,18 +15,26 @@ if (getStartedBtn) {
     });
 }
 
-// Try Now buttons (journal types)
-document.querySelectorAll('.try-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        alert("This journal mode will be available after login 🚀");
+// Try Now buttons → respective journal tab
+// Order in HTML: Q&A, Planner, Wreck This, Notebook
+const journalRoutes = [
+    "journal.html?tab=qa",
+    "journal.html?tab=planner",
+    "journal.html?tab=wreck",
+    "journal.html?tab=notebook"
+];
+
+document.querySelectorAll('.try-btn').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+        window.location.href = journalRoutes[i];
     });
 });
 
-// Create First Entry button
+// Create First Entry → Notebook journal
 const createBtn = document.querySelector('.create');
 if (createBtn) {
     createBtn.addEventListener('click', () => {
-        alert("Sign up to start your first journal entry ✨");
+        window.location.href = "journal.html?tab=notebook";
     });
 }
 
@@ -35,37 +43,5 @@ const navLinks = document.querySelectorAll('nav ul li a');
 navLinks.forEach(link => {
     if (link.href === window.location.href) {
         link.classList.add('active');
-    }
-});
-
-// LOGIN / LOGOUT LOGIC
-const authBtn = document.getElementById("auth-btn");
-
-// Check login state on page load
-function updateAuthUI() {
-    const isLoggedIn = localStorage.getItem("loggedIn");
-
-    if (isLoggedIn === "true") {
-        authBtn.textContent = "Logout";
-    } else {
-        authBtn.textContent = "Login";
-    }
-}
-
-updateAuthUI();
-
-// Handle login / logout click
-authBtn.addEventListener("click", () => {
-    const isLoggedIn = localStorage.getItem("loggedIn");
-
-   if (isLoggedIn === "true") {
-    // Logout
-    localStorage.removeItem("loggedIn");
-    updateAuthUI();
-    } else {
-        // Login (dummy login)
-        localStorage.setItem("loggedIn", "true");
-        alert("Login successful 🎉");
-        updateAuthUI();
     }
 });

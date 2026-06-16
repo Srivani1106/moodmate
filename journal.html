@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Daily Reflection</title>
+  <title>Daily Reflection – mindAIry</title>
   <link rel="stylesheet" href="journal.css" />
 </head>
 <body>
@@ -13,320 +13,287 @@
       <li class="logo">
         <a href="#">
           <img src="journaling logo.png" alt="Logo">
-          <span>mindAIry</span>
+          <span>MoodMate</span>
         </a>
       </li>
       <li><a href="index.html">Home</a></li>
       <li><a href="journal.html">Journal</a></li>
-      <li><a href="#">Insights</a></li>
-      <li><a href="#">Chatbot</a></li>
-      <li><a href="login.html" id="auth-btn">Login</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="chatbot.html">Chatbot</a></li>
+      <li id="auth-li"></li>
     </ul>
   </nav>
 </header>
 
 <div class="page-container">
-<main class="layout">
+  <main class="layout">
 
-<section class="left">
+    <!-- LEFT SECTION -->
+    <section class="left">
 
-  <div class="journal-top">
-<h1>Daily Reflection</h1>
-<button id="focusMode">Focus Mode</button>
-</div>
-
-<p class="subtitle">Choose a format and start writing</p>
-  <!-- Journal Type Buttons -->
-  <div class="journal-types">
-    <button class="active" data-type="notebook">Notebook</button>
-    <button data-type="qa">Q&A</button>
-    <button data-type="planner">Planner</button>
-    <button data-type="wreck">Wreck This</button>
-    
-  </div>
-
-  <!-- Mood Section -->
-  <div class="mood-section">
-    <p class="mood-title">How are you feeling today?</p>
-
-    <div class="moods">
-      <div class="mood" data-mood="Sad">😔<span>Sad</span></div>
-      <div class="mood" data-mood="Anxious">😨<span>Anxious</span></div>
-      <div class="mood" data-mood="Neutral">😐<span>Neutral</span></div>
-      <div class="mood" data-mood="Peaceful">😌<span>Peaceful</span></div>
-      <div class="mood" data-mood="Joyful">😄<span>Joyful</span></div>
-    </div>
-  </div>
-
-  <!-- NOTEBOOK EDITOR -->
-  <div class="editor" id="notebook-editor">
-    <h2>Notebook</h2>
-
-    <input type="text" id="entry-title" placeholder="Title..." />
-
-    <textarea id="entry-content" placeholder="Start writing your thoughts..."></textarea>
-
-    <div class="editor-actions">
-      <button id="save-notebook">Save</button>
-      <button id="delete-notebook">Delete</button>
-    </div>
-  </div>
-
-  <!-- Q&A EDITOR (hidden initially) -->
-  <div class="editor hidden" id="qa-editor">
-
-    <h2>Guided Reflection</h2>
-
-    <input type="text" id="qa-title" placeholder="Give your entry a title..." />
-
-    <div id="questions-container">
-      <div class="question-block">
-        <p class="question">✨ What's one thing that made you smile?</p>
-        <textarea placeholder="Your thoughts..."></textarea>
+      <div class="journal-top">
+        <h1>Daily Reflection</h1>
+        <button id="focusMode">Focus Mode</button>
       </div>
-    </div>
 
-    <button id="add-question-btn" class="add-question">
-      + Add Question
-    </button>
+      <p class="subtitle">Choose a format and start writing</p>
 
-    <div class="editor-actions">
-      <button id="save-qa">Save Entry</button>
-    </div>
+      <!-- Journal Type Buttons -->
+      <div class="journal-types">
+        <button class="active" data-type="notebook">Notebook</button>
+        <button data-type="qa">Q&amp;A</button>
+        <button data-type="planner">Planner</button>
+        <button data-type="wreck">Wreck This</button>
+      </div>
 
-  </div>
-  <div class="editor hidden" id="planner-editor">
+      <!-- Mood Section -->
+      <div class="mood-section">
+        <p class="mood-title">How are you feeling today?</p>
+        <div class="moods">
+          <div class="mood" data-mood="Sad">😔<span>Sad</span></div>
+          <div class="mood" data-mood="Anxious">😨<span>Anxious</span></div>
+          <div class="mood" data-mood="Neutral">😐<span>Neutral</span></div>
+          <div class="mood" data-mood="Peaceful">😌<span>Peaceful</span></div>
+          <div class="mood" data-mood="Joyful">😄<span>Joyful</span></div>
+        </div>
+      </div>
 
+      <!-- NOTEBOOK EDITOR -->
+      <div class="editor" id="notebook-editor">
+        <h2>Notebook</h2>
+        <div class="entry-meta" id="notebook-date"></div>
+        <input type="text" id="entry-title" placeholder="Title..." />
+        <div class="char-count"><span id="char-count">0</span> characters</div>
+        <textarea id="entry-content" placeholder="Start writing your thoughts..."></textarea>
+        <div class="editor-actions">
+          <button id="save-notebook">💾 Save</button>
+          <button id="delete-notebook" class="btn-danger">🗑 Delete</button>
+        </div>
+        <p id="notebook-msg" class="save-msg"></p>
+      </div>
 
-  <h2>Planner</h2>
+      <!-- Q&A EDITOR -->
+      <div class="editor hidden" id="qa-editor">
+        <h2>Guided Reflection</h2>
+        <div class="entry-meta" id="qa-date"></div>
+        <input type="text" id="qa-title" placeholder="Give your entry a title..." />
+        <div id="questions-container">
+          <!-- all questions injected by JS so they're all deletable -->
+        </div>
+        <button id="add-question-btn" class="add-question">+ Add Question</button>
+        <div class="editor-actions">
+          <button id="save-qa">💾 Save Entry</button>
+        </div>
+        <p id="qa-msg" class="save-msg"></p>
+      </div>
 
-  <!-- Planner Navigation -->
-  <div class="planner-tabs">
-    <button class="planner-tab active" data-plan="daily">Daily Planner</button>
-    <button class="planner-tab" data-plan="weekly">Weekly Planner</button>
-    <button class="planner-tab" data-plan="monthly">Monthly Planner</button>
-  </div>
+      <!-- PLANNER EDITOR -->
+      <div class="editor hidden" id="planner-editor">
+        <h2>Planner</h2>
+        <div class="planner-tabs">
+          <button class="planner-tab active" data-plan="daily">Daily</button>
+          <button class="planner-tab" data-plan="weekly">Weekly</button>
+          <button class="planner-tab" data-plan="monthly">Monthly</button>
+        </div>
 
+        <!-- DAILY -->
+        <div class="planner-section" id="daily-section">
+          <div class="planner-date" id="daily-date-label"></div>
+          <h3>📝 Today's Tasks</h3>
+          <div id="daily-tasks"></div>
+          <button class="add-btn" id="add-daily-task">+ Add Task</button>
+          <h3>🎯 Goals for Today</h3>
+          <div id="daily-goals"></div>
+          <button class="add-btn" id="add-daily-goal">+ Add Goal</button>
+          <h3>💭 Reflection</h3>
+          <textarea id="daily-reflection" placeholder="How do you feel about today's plan?"></textarea>
+          <div class="editor-actions">
+            <button id="save-daily">💾 Save Daily Plan</button>
+            <button id="clear-daily" class="btn-danger">🗑 Clear</button>
+          </div>
+          <p id="daily-msg" class="save-msg"></p>
+        </div>
 
-  <!-- DAILY -->
-  <div class="planner-section" id="daily-section">
+        <!-- WEEKLY -->
+        <div class="planner-section hidden" id="weekly-section">
+          <div class="planner-date" id="weekly-date-label"></div>
+          <div class="week-grid" id="week-grid"></div>
+          <h3>🎯 Weekly Goals</h3>
+          <div id="weekly-goals"></div>
+          <button class="add-btn" id="add-weekly-goal">+ Add Goal</button>
+          <div class="editor-actions">
+            <button id="save-weekly">💾 Save Weekly Plan</button>
+            <button id="clear-weekly" class="btn-danger">🗑 Clear</button>
+          </div>
+          <p id="weekly-msg" class="save-msg"></p>
+        </div>
 
-    <input type="text" placeholder="Give your entry a title..." />
+        <!-- MONTHLY -->
+        <div class="planner-section hidden" id="monthly-section">
+          <div class="planner-date" id="monthly-date-label"></div>
+          <div class="month-calendar" id="month-calendar"></div>
+          <h3>🎯 Monthly Goals</h3>
+          <div id="monthly-goals"></div>
+          <button class="add-btn" id="add-monthly-goal">+ Add Goal</button>
+          <div class="editor-actions">
+            <button id="save-monthly">💾 Save Monthly Plan</button>
+            <button id="clear-monthly" class="btn-danger">🗑 Clear</button>
+          </div>
+          <p id="monthly-msg" class="save-msg"></p>
+        </div>
+      </div>
 
-    <h3>Today's Tasks</h3>
-    <div id="daily-tasks"></div>
-    <button class="add-btn" id="add-daily-task">+ Add Task</button>
+      <!-- WRECK THIS EDITOR -->
+      <div class="editor hidden" id="wreck-editor">
+        <h2>Wreck This Journal</h2>
+        <p class="wreck-intro">A space to release, destroy, and let go. No rules — just feel.</p>
+        <div class="wreck-buttons">
+          <button data-activity="color-activity"> Mandala Coloring</button>
+          <button data-activity="braindump-activity">Brain Dump</button>
+          <button data-activity="startBubbles"> Pop your Worries</button>
+          <button data-activity="burn-activity"> Burn Your Thoughts</button>
+          <button data-activity="break-activity"> Break the Wall</button>
+          <button data-activity="breath-activity"> Breathing Exercise</button>
+          <button data-activity="unsend-activity"> Unsend It</button>
+        </div>
 
-    <h3>Goals for Today</h3>
-    <div id="daily-goals"></div>
-    <button class="add-btn" id="add-daily-goal">+ Add Goal</button>
+        <div id="activity-container">
 
-    <h3>Reflection</h3>
-    <textarea placeholder="How do you feel about today's plan?"></textarea>
+          <!-- POP YOUR WORRIES -->
+          <div class="wreck-activity hidden" id="startBubbles">
+            <h3>Pop Your Worries</h3>
+            <input type="text" id="worryInput" placeholder="Type your worry">
+            <button id="addWorry">Add Worry</button>
+            <ul id="worryList"></ul>
+            <button id="createBubbles"> Start Popping</button>
+            <div id="bubbleArea">
+              <canvas id="bubbleCanvas"></canvas>
+            </div>
+            <p id="popMessage"></p>
+          </div>
 
-  </div>
+          <!-- COLOR -->
+          <div class="wreck-activity hidden" id="color-activity">
+            <h3>Mandala Coloring</h3>
+            <div class="color-controls">
+              <label>Pick a color:</label>
+              <input type="color" id="colorPicker">
+              <button id="newMandala">New Mandala</button>
+            </div>
+            <div class="mandala-container">
+              <svg id="mandalaCanvas" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <p class="mandala-hint">Click any shape to fill it with your chosen color</p>
+          </div>
 
+          <!-- BRAIN DUMP -->
+          <div class="wreck-activity hidden" id="braindump-activity">
+            <h3>Brain Dump</h3>
+            <p>Write everything in your mind for 60 seconds.</p>
+            <div class="timer-container">
+              <svg width="120" height="120">
+                <circle cx="60" cy="60" r="50" class="timer-bg"></circle>
+                <circle cx="60" cy="60" r="50" class="timer-progress" id="timerCircle"></circle>
+              </svg>
+              <div id="timerText">60</div>
+            </div>
+            <textarea id="brainText" placeholder="Start typing your thoughts..."></textarea>
+            <button id="startDump">Start</button>
+            <button id="clearDump">Clear</button>
+            <p id="brainMessage"></p>
+          </div>
 
-  <!-- WEEKLY -->
-  <div class="planner-section hidden" id="weekly-section">
+          <!-- BURN -->
+          <div class="wreck-activity hidden" id="burn-activity">
+            <h3>Burn Your Thoughts </h3>
+            <p class="activity-hint">Write it down, then click the paper to burn it.</p>
+            <input type="text" id="burnInput" placeholder="Write a negative thought...">
+            <button id="burnBtn"> Create Paper</button>
+            <div id="burnArea">
+              <div id="burnPaperWrap" class="hidden">
+                <canvas id="burnCanvas" width="340" height="220"></canvas>
+                <div id="burnPaperText"></div>
+              </div>
+            </div>
+          </div>
 
-    <h3>Weekly Tasks</h3>
-    <div id="weekly-tasks"></div>
-    <button class="add-btn" id="add-weekly-task">+ Add Weekly Task</button>
+          <!-- BREAK -->
+          <div class="wreck-activity hidden" id="break-activity">
+            <h3>Break the Stress Wall</h3>
 
-    <h3>Weekly Goals</h3>
-    <div id="weekly-goals"></div>
-    <button class="add-btn" id="add-weekly-goal">+ Add Weekly Goal</button>
+            <!-- STEP 1: Input screen -->
+            <div id="wall-input-screen">
+              <p class="activity-hint">What's weighing on you? Add up to 8 stressors — each one becomes a brick you'll smash.</p>
+              <div id="stressor-inputs">
+                <div class="stressor-row">
+                  <input type="text" class="stressor-input" placeholder="e.g. exam deadline…" maxlength="22">
+                </div>
+              </div>
+              <button id="add-stressor-btn">+ Add another</button>
+              <div class="wall-input-actions">
+                <button id="build-wall-btn"> Build My Wall</button>
+              </div>
+            </div>
 
-  </div>
+            <!-- STEP 2: Wall canvas -->
+            <div id="wall-canvas-screen" class="hidden">
+              <p id="wall-instruction" class="activity-hint">Click each brick 3 times to smash it. Let it go.</p>
+              <div id="wallWrap">
+                <canvas id="wallCanvas"></canvas>
+              </div>
+              <div class="wall-controls">
+                <button id="resetWall"> New Wall</button>
+                <span id="wallProgress" class="wall-progress"></span>
+              </div>
+            </div>
+          </div>
 
+          <!-- BREATHING -->
+          <div class="wreck-activity hidden" id="breath-activity">
+            <h3>Breathing Exercise</h3>
+            <p id="breathText">Inhale</p>
+            <div id="breath-circle"></div>
+          </div>
 
-  <!-- MONTHLY -->
-  <div class="planner-section hidden" id="monthly-section">
+          <!-- UNSEND IT -->
+          <div class="wreck-activity hidden" id="unsend-activity">
+            <h3>Unsend It </h3>
+            <p class="unsend-desc">Write the letter you never sent. Then tear it apart.</p>
+            <input type="text" id="unsend-to" placeholder="To: (a person, a feeling, a version of yourself…)" />
+            <textarea id="unsend-body" placeholder="Dear ___,&#10;&#10;Everything I never said…"></textarea>
+            <div class="editor-actions">
+              <button id="unsend-rip-btn"> Rip It Up</button>
+              <button id="unsend-clear-btn" class="btn-danger">🗑 Clear</button>
+            </div>
+            <div id="unsend-shreds"></div>
+            <p id="unsend-msg" class="save-msg"></p>
+          </div>
 
-    <h3>Monthly Tasks</h3>
-    <div id="monthly-tasks"></div>
-    <button class="add-btn" id="add-monthly-task">+ Add Monthly Task</button>
+        </div>
+      </div>
+    </section>
 
-    <h3>Monthly Goals</h3>
-    <div id="monthly-goals"></div>
-    <button class="add-btn" id="add-monthly-goal">+ Add Monthly Goal</button>
+    <!-- RIGHT SECTION – Recent Entries -->
+    <aside class="right">
+      <h2>Recent Entries</h2>
+      <div id="recent-entries-list">
+        <p class="no-entries-msg">No entries yet. Start writing!</p>
+      </div>
 
-  </div>
+      <!-- Streak tracker -->
+      <div class="streak-box">
+        <span class="streak-icon">🔥</span>
+        <div>
+          <p class="streak-label">Current Streak</p>
+          <p class="streak-count"><span id="streak-count">0</span> days</p>
+        </div>
+      </div>
+    </aside>
 
-</div> 
-<div class="editor hidden" id="wreck-editor">
-
-<h2>Wreck This Journal</h2>
-
-<div class="wreck-buttons">
-
-<button data-activity="color-activity"> Color Shapes</button>
-<button data-activity="braindump-activity">Brain Dump </button>
-<button data-activity="startBubbles">Pop your Worries  </button>
-<button data-activity="burn-activity">Burn Your Thoughts</button>
-<button data-activity="break-activity"> Break the Wall</button>
-<button data-activity="breath-activity"> Breathing Exercise</button>
-
+  </main>
 </div>
 
-<div id="activity-container">
-<!-- pop your worries -->
-<div class="wreck-activity hidden" id="startBubbles">
-
-<h3>Pop Your Worries</h3>
-
-<input type="text" id="worryInput" placeholder="Type your worry">
-<button id="addWorry">Add Worry</button>
-
-<ul id="worryList"></ul>
-
-<button id="createBubbles">Start Popping</button>
-
-<div id="bubbleArea"></div>
-<p id="popMessage"></p>
-
-</div>
-<!-- COLOR -->
-<div class="wreck-activity hidden" id="color-activity">
-
-<h3>Mandala Coloring</h3>
-
-<div class="color-controls">
-<label>Pick a color:</label>
-<input type="color" id="colorPicker">
-<button id="newMandala">New Mandala</button>
-</div>
-
-<div class="mandala-container">
-
-<svg id="mandalaCanvas" viewBox="0 0 400 400">
-
-<!-- center -->
-<circle cx="200" cy="200" r="40" class="colorable"/>
-
-<!-- ring 1 -->
-<circle cx="200" cy="100" r="25" class="colorable"/>
-<circle cx="300" cy="200" r="25" class="colorable"/>
-<circle cx="200" cy="300" r="25" class="colorable"/>
-<circle cx="100" cy="200" r="25" class="colorable"/>
-
-<!-- petals -->
-<polygon points="200,20 230,90 170,90" class="colorable"/>
-<polygon points="380,200 310,230 310,170" class="colorable"/>
-<polygon points="200,380 230,310 170,310" class="colorable"/>
-<polygon points="20,200 90,230 90,170" class="colorable"/>
-
-<!-- diagonal petals -->
-<polygon points="300,70 330,120 270,120" class="colorable"/>
-<polygon points="330,280 300,330 270,280" class="colorable"/>
-<polygon points="70,120 120,120 100,70" class="colorable"/>
-<polygon points="70,280 120,280 100,330" class="colorable"/>
-
-</svg>
-
-</div>
-
-</div>
-
-<!-- BRAIN DUMP -->
-<div class="wreck-activity hidden" id="braindump-activity">
-
-<h3>Brain Dump</h3>
-
-<p>Write everything in your mind for 60 seconds.</p>
-
-<div class="timer-container">
-
-<svg width="120" height="120">
-
-<circle cx="60" cy="60" r="50" class="timer-bg"></circle>
-
-<circle cx="60" cy="60" r="50" class="timer-progress" id="timerCircle"></circle>
-
-</svg>
-
-<div id="timerText">60</div>
-
-</div>
-
-<textarea id="brainText" placeholder="Start typing your thoughts..."></textarea>
-
-<button id="startDump">Start</button>
-<button id="clearDump">Clear</button>
-
-<p id="brainMessage"></p>
-
-</div>
-<!-- BURN -->
-<div class="wreck-activity hidden" id="burn-activity">
-
-<h3>Burn Your Thoughts 🔥</h3>
-
-<input type="text" id="burnInput" placeholder="Write a negative thought">
-
-<button id="burnBtn">Create Thought</button>
-
-<div id="burnArea"></div>
-
-</div>
-
-<!-- BREAK -->
-<div class="wreck-activity hidden" id="break-activity">
-
-<h3>Break the Stress Wall</h3>
-
-<div id="wall"></div>
-
-<button id="resetWall">Reset Wall</button>
-
-</div>
-
-
-<!-- BREATHING -->
-<div class="wreck-activity hidden" id="breath-activity">
-
-<h3>Breathing Exercise</h3>
-
-<p id="breathText">Inhale</p>
-
-<div id="breath-circle"></div>
-
-</div>
-</div>
-
-</div>
-</section>
-<!-- Right Section 
-<aside class="right">
-  <h2>Recent Entries</h2>
-
-  <div class="entry-card">
-    <div class="icon">📘</div>
-    <div>
-      <h4>Morning Reflections 😊</h4>
-      <p>Today started with a beautiful sunrise...</p>
-      <span class="tag">Notebook</span>
-      <span class="time">about 2 years ago</span>
-    </div>
-  </div>
-
-  <div class="entry-card">
-    <div class="icon">❓</div>
-    <div>
-      <h4>Weekly Check-in 😐</h4>
-      <p>Answered my weekly reflection questions...</p>
-      <span class="tag">Q&A</span>
-      <span class="time">about 2 years ago</span>
-    </div>
-  </div>
-
-</aside> -->
-
-</main>
-</div>
-
+<script src="auth.js"></script>
 <script src="journal.js"></script>
 </body>
 </html>
-
